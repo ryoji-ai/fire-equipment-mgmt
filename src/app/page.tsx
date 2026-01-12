@@ -11,12 +11,6 @@ export default async function DashboardPage() {
     .select('*', { count: 'exact', head: true })
 
   // 在庫不足の品目数
-  const { data: lowStockMaterials } = await supabase
-    .from('materials')
-    .select('id')
-    .lt('current_quantity', supabase.rpc('min_quantity'))
-
-  // 簡易的な在庫不足チェック
   const { data: allMaterials } = await supabase
     .from('materials')
     .select('id, current_quantity, min_quantity')
