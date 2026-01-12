@@ -7,7 +7,7 @@ export default async function InventoryAddPage() {
   // 資器材一覧取得（ドロップダウン用）
   const { data: materials } = await supabase
     .from('materials')
-    .select('id, name, category, unit, current_quantity, min_quantity')
+    .select('*')
     .order('name', { ascending: true })
 
   return (
