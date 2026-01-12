@@ -3,7 +3,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/Badge'
 import { InventoryLogWithMaterial } from '@/types/inventory'
 import { format } from 'date-fns'
-import { ja } from 'date-fns/locale'
 
 interface RecentLogsProps {
   logs: InventoryLogWithMaterial[]
@@ -44,7 +43,7 @@ export function RecentLogs({ logs }: RecentLogsProps) {
             {logs.map((log) => (
               <TableRow key={log.id}>
                 <TableCell>
-                  {format(new Date(log.logged_at), 'M/d HH:mm', { locale: ja })}
+                  {format(new Date(log.logged_at), 'M/d HH:mm')}
                 </TableCell>
                 <TableCell>{log.materials.name}</TableCell>
                 <TableCell>
