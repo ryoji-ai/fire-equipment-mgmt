@@ -3,12 +3,20 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { Material } from '@/types/material'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent } from '@/components/ui/Card'
 
+interface MaterialForInventory {
+  id: string
+  name: string
+  category: string
+  unit: string
+  current_quantity: number
+  min_quantity: number
+}
+
 interface InventoryFormProps {
-  materials: Material[]
+  materials: MaterialForInventory[]
 }
 
 export function InventoryForm({ materials }: InventoryFormProps) {
