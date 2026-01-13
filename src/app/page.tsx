@@ -1,6 +1,7 @@
 import { createServerClient } from '@/lib/supabase/server'
 import { StatsCard } from '@/components/dashboard/StatsCard'
 import { RecentLogs } from '@/components/dashboard/RecentLogs'
+import { toZonedTime, fromZonedTime } from 'date-fns-tz'
 
 export default async function DashboardPage() {
   const supabase = await createServerClient()
@@ -19,13 +20,14 @@ export default async function DashboardPage() {
     (m) => m.current_quantity < m.min_quantity
   ).length || 0
 
-  // 今日の補充/使用件数
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  // 今日の補充/使用件数（日本時間基準）
+  const nowInJST = toZonedTime(new Date(), 'Asia/Tokyo')
+  nowInJST.setHours(0, 0, 0, 0)
+  const todayStartUTC = fromZonedTime(nowInJST, 'Asia/Tokyo')
   const { count: todayLogs } = await supabase
     .from('inventory_logs')
     .select('*', { count: 'exact', head: true })
-    .gte('logged_at', today.toISOString())
+    .gte('logged_at', todayStartUTC.toISOString())
 
   // 最近の履歴10件（JOINでmaterial情報も取得）
   const { data: recentLogs } = await supabase
