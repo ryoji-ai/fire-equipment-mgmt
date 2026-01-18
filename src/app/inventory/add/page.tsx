@@ -12,7 +12,7 @@ export default async function InventoryAddPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
         補充・使用登録
       </h1>
       <InventoryForm materials={materials || []} />

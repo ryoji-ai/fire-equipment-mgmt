@@ -124,7 +124,7 @@ export function InventoryForm({ materials }: InventoryFormProps) {
               required
               value={selectedMaterialId}
               onChange={(e) => setSelectedMaterialId(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">選択してください</option>
               {materials.map((material) => (
@@ -141,26 +141,26 @@ export function InventoryForm({ materials }: InventoryFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               操作タイプ <span className="text-red-500">*</span>
             </label>
-            <div className="flex gap-4">
-              <label className="flex items-center cursor-pointer">
+            <div className="grid grid-cols-2 gap-3">
+              <label className="flex items-center justify-center cursor-pointer border border-gray-300 rounded-lg p-4 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700 transition-colors">
                 <input
                   type="radio"
                   name="type"
                   value="in"
                   required
-                  className="mr-2"
+                  className="sr-only"
                 />
-                <span>補充</span>
+                <span className="font-medium">補充</span>
               </label>
-              <label className="flex items-center cursor-pointer">
+              <label className="flex items-center justify-center cursor-pointer border border-gray-300 rounded-lg p-4 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700 transition-colors">
                 <input
                   type="radio"
                   name="type"
                   value="out"
                   required
-                  className="mr-2"
+                  className="sr-only"
                 />
-                <span>使用</span>
+                <span className="font-medium">使用</span>
               </label>
             </div>
           </div>
@@ -179,7 +179,8 @@ export function InventoryForm({ materials }: InventoryFormProps) {
               name="quantity"
               min="1"
               required
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              inputMode="numeric"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -195,7 +196,7 @@ export function InventoryForm({ materials }: InventoryFormProps) {
               id="note"
               name="note"
               rows={3}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="例: 定期発注分、訓練使用、救急出動時使用"
             />
           </div>
@@ -213,14 +214,14 @@ export function InventoryForm({ materials }: InventoryFormProps) {
               type="text"
               name="logged_by"
               required
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="例: 田中太郎"
             />
           </div>
 
           {/* 送信ボタン */}
-          <div className="flex gap-4">
-            <Button type="submit" disabled={loading} className="flex-1">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <Button type="submit" disabled={loading} className="flex-1 py-3">
               {loading ? '登録中...' : '登録する'}
             </Button>
             <Button
@@ -228,6 +229,7 @@ export function InventoryForm({ materials }: InventoryFormProps) {
               variant="outline"
               onClick={() => router.push('/')}
               disabled={loading}
+              className="py-3"
             >
               キャンセル
             </Button>

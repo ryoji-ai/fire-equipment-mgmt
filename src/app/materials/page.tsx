@@ -41,10 +41,10 @@ export default async function MaterialsPage({ searchParams }: PageProps) {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">資器材一覧</h1>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">資器材一覧</h1>
         <Link href="/materials/new">
-          <Button>新規登録</Button>
+          <Button className="w-full sm:w-auto">新規登録</Button>
         </Link>
       </div>
 

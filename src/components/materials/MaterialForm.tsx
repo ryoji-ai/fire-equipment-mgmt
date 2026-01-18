@@ -109,7 +109,7 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
               name="name"
               required
               defaultValue={material?.name || ''}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="例: 生理食塩水 500ml"
             />
           </div>
@@ -127,7 +127,7 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
               name="category"
               required
               defaultValue={material?.category || ''}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">選択してください</option>
               {MATERIAL_CATEGORIES.map((cat) => (
@@ -151,7 +151,7 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
               name="unit"
               required
               defaultValue={material?.unit || ''}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">選択してください</option>
               {MATERIAL_UNITS.map((u) => (
@@ -162,42 +162,47 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
             </select>
           </div>
 
-          {/* 最小在庫数 */}
-          <div>
-            <label
-              htmlFor="min_quantity"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              最小在庫数 <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="min_quantity"
-              type="number"
-              name="min_quantity"
-              min="0"
-              required
-              defaultValue={material?.min_quantity || 0}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          {/* 在庫数（2列グリッド） */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* 最小在庫数 */}
+            <div>
+              <label
+                htmlFor="min_quantity"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                最小在庫数 <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="min_quantity"
+                type="number"
+                name="min_quantity"
+                min="0"
+                required
+                inputMode="numeric"
+                defaultValue={material?.min_quantity || 0}
+                className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
 
-          {/* 現在の在庫数 */}
-          <div>
-            <label
-              htmlFor="current_quantity"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              現在の在庫数 <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="current_quantity"
-              type="number"
-              name="current_quantity"
-              min="0"
-              required
-              defaultValue={material?.current_quantity || 0}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            {/* 現在の在庫数 */}
+            <div>
+              <label
+                htmlFor="current_quantity"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                現在の在庫数 <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="current_quantity"
+                type="number"
+                name="current_quantity"
+                min="0"
+                required
+                inputMode="numeric"
+                defaultValue={material?.current_quantity || 0}
+                className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
 
           {/* 説明・備考 */}
@@ -213,14 +218,14 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
               name="description"
               rows={3}
               defaultValue={material?.description || ''}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="例: 点滴・洗浄用"
             />
           </div>
 
           {/* ボタン */}
-          <div className="flex gap-4">
-            <Button type="submit" disabled={loading} className="flex-1">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <Button type="submit" disabled={loading} className="flex-1 py-3">
               {loading
                 ? mode === 'create'
                   ? '登録中...'
@@ -234,6 +239,7 @@ export function MaterialForm({ material, mode }: MaterialFormProps) {
               variant="outline"
               onClick={() => router.push('/materials')}
               disabled={loading}
+              className="py-3"
             >
               キャンセル
             </Button>
